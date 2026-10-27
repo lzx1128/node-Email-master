@@ -1,0 +1,16 @@
+{
+    "apps": [
+      {
+        "name": "oneflyEmail",
+        "script": "./src/server.js",
+        "node_args": "--no-deprecation",
+        "log_date_format": "YYYY-MM-DD HH:mm:ss.SSS",
+        "env": {
+          "SMTP_USER": "AKIAVQORTZ5EYMCI3CAB",
+          "SMTP_PASS": "BOnSFAdEy4rd38EBVV5yxLXyTnaULXO2BdZWxUWL7oVO",
+          "MAIL_FROM": "Onefly <support@onefly.com>",
+          "MAIL_TO": "sales@oneflya.com"
+        }
+      }
+    ]
+  }
