@@ -5,7 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node --env-file=.env src/server.js",
-    "check": "node --check src/server.js && node --check src/app.js && node --check src/email/route.js && node --check src/email/service.js && node --check src/email/guard.js && node --check src/email/renderer.js && node --check src/middleware/risk.js && node --check src/travel/proxy.js && node --check src/travel/airport.js && node --check src/travel/airline.js"
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/email/route.js && node --check src/email/service.js && node --check src/email/guard.js && node --check src/email/renderer.js && node --check src/middleware/risk.js && node --check src/travel/proxy.js && node --check src/travel/airport.js && node --check src/travel/airline.js && node --check src/travel/search.js && node --check src/travel/seat.js && node --check src/travel/baggage.js && node --check src/travel/book.js"
   },
   "author": "",
   "license": "ISC",

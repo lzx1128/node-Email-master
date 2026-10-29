@@ -2,12 +2,16 @@
 
 这是一个轻量的 Node.js 邮件接口，用于接收 Onefly 官网联系表单，并将内容发送到指定邮箱。
 
-项目提供三个业务接口：
+项目提供七个业务接口：
 
 ```text
 POST /send-email
 GET  /api/suggest
 POST /webAirline/query
+GET  /search
+POST /get_seats
+POST /get_baggages
+POST /book
 ```
 
 ## 项目结构
@@ -27,6 +31,10 @@ src/
   travel/
     airport.js                  城市/机场三字码联想中转
     airline.js                  航司名称与 Logo 查询中转
+    search.js                   航班价格搜索中转
+    seat.js                     座位查询中转
+    baggage.js                  行李查询中转
+    book.js                     航班验价中转
     proxy.js                    请求转发公共处理
 
 .env                            本地运行配置，不提交到 Git
@@ -145,7 +153,23 @@ curl.exe -X POST "http://localhost:3000/webAirline/query" `
   -d '{"codeList":["CA","MU","CZ"]}'
 ```
 
-这两个接口不做业务参数校验，直接转发请求并代理上游响应，固定超时为 5 秒。
+搜索航班价格：
+
+```powershell
+curl.exe -G "http://localhost:3000/search" `
+  --data-urlencode "type=roundtrip" `
+  --data-urlencode "depCity=BKK" `
+  --data-urlencode "arrCity=HKT" `
+  --data-urlencode "depDate=2026-11-20" `
+  --data-urlencode "retDate=2026-11-27" `
+  --data-urlencode "adult=1" `
+  --data-urlencode "child=0" `
+  --data-urlencode "infant=0"
+```
+
+`GET /search` 会将旧前端的查询参数转换为上游格式；`type=roundtrip` 时才会发送返程日期。价格搜索固定使用上游的 `action=search&www=www&version=v2` 参数和 30 秒超时。
+
+机场联想和航司查询接口直接代理上游响应，固定超时为 5 秒。
 
 ## 接口保护
 

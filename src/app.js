@@ -7,6 +7,10 @@ const createEmailRouter = require('./email/route');
 const sendEmail = require('./email/service');
 const createAirportSuggestRouter = require('./travel/airport');
 const createAirlineQueryRouter = require('./travel/airline');
+const createSearchRouter = require('./travel/search');
+const createSeatRouter = require('./travel/seat');
+const createBaggageRouter = require('./travel/baggage');
+const createBookRouter = require('./travel/book');
 
 function createApp(options = {}) {
   const app = express();
@@ -19,6 +23,10 @@ function createApp(options = {}) {
   app.use(express.json({ limit: '32kb' }));
   app.use(createAirportSuggestRouter(options.travelFetch));
   app.use(createAirlineQueryRouter(options.travelFetch));
+  app.use(createSearchRouter(options.travelFetch));
+  app.use(createSeatRouter(options.travelFetch));
+  app.use(createBaggageRouter(options.travelFetch));
+  app.use(createBookRouter(options.travelFetch));
   app.use(requestGuard, createEmailRouter(emailSender, options.emailGuard));
 
   app.use((error, req, res, next) => {
