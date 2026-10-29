@@ -2,8 +2,7 @@
 
 const express = require('express');
 const { proxyError, relay, requestTimeout, upstreamUrl } = require('./proxy');
-
-const UPSTREAM_URL = 'http://10.207.0.13:8050/webAirline/query';
+const UPSTREAM_URL = 'http://172.233.74.96:8050/webAirline/query';
 
 function createAirlineQueryRouter(fetchImpl = globalThis.fetch) {
   if (typeof fetchImpl !== 'function') throw new TypeError('fetchImpl must be a function');
@@ -11,7 +10,7 @@ function createAirlineQueryRouter(fetchImpl = globalThis.fetch) {
   const router = express.Router();
   const timeoutMs = requestTimeout();
 
-  router.post('/webAirline/query', async (req, res) => {
+  router.post('/webAirline', async (req, res) => {
     try {
       const url = upstreamUrl(UPSTREAM_URL);
       const response = await fetchImpl(url, {

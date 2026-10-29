@@ -11,7 +11,7 @@ function createAirportSuggestRouter(fetchImpl = globalThis.fetch) {
   const router = express.Router();
   const timeoutMs = requestTimeout();
 
-  router.get('/api/suggest', async (req, res) => {
+  router.get('/suggest', async (req, res) => {
     try {
       const url = upstreamUrl(UPSTREAM_URL);
       const queryIndex = req.originalUrl.indexOf('?');
